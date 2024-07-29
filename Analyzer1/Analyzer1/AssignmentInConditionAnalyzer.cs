@@ -63,32 +63,14 @@ namespace Analyzer1
         }
         private static bool ContainsAssignment( SyntaxNode node )
         {
+            // ノードが AssignmentExpressionSyntax である場合は true を返す
+            if ( node is AssignmentExpressionSyntax )
+            {
+                return true;
+            }
             // 条件式内の代入を検出するためのロジック
             return node.DescendantNodes().OfType<AssignmentExpressionSyntax>().Any();
         }
-        //// 式に代入演算子が含まれているか確認するヘルパーメソッド
-        //private static bool ContainsAssignment( ExpressionSyntax expression )
-        //{
-        //    // 二項演算子の場合に左側と右側を再帰的に確認
-        //    if ( expression is BinaryExpressionSyntax binaryExpression )
-        //    {
-        //        // 代入演算子かどうか確認
-        //        if ( binaryExpression.IsKind( SyntaxKind.SimpleAssignmentExpression ) )
-        //        {
-        //            return true;
-        //        }
-
-        //        // 左右の式を再帰的に確認
-        //        return ContainsAssignment( binaryExpression.Left ) || ContainsAssignment( binaryExpression.Right );
-        //    }
-
-        //    // 親hesionの場合に条件を再帰的に確認
-        //    if ( expression is ParenthesizedExpressionSyntax parenthesizedExpression )
-        //    {
-        //        return ContainsAssignment( parenthesizedExpression.Expression );
-        //    }
-
-        //    return false;
-        //}
+        
     }
 }
